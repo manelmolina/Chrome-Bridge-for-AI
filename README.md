@@ -21,22 +21,6 @@ Al establecer el túnel SSH, la app habilita automáticamente **ambos** mecanism
 
 Para usarlo, solo tienes que decirle a tu agente de IA que se conecte a Chrome por Chrome Dev Tools y revise lo que necesites (por ejemplo: *"Conéctate a Chrome por Chrome Dev Tools y mira los errores de consola o las peticiones de red"*).
 
-## Configurar herramientas en el servidor
-
-- **Antigravity (`agy`)**: funciona directamente sin configuración extra usando `/browser ...`.
-- **Codex CLI**:
-  ```bash
-  codex mcp add chrome-devtools -- npx -y chrome-devtools-mcp@latest --browser-url=http://127.0.0.1:9222
-  ```
-- **Claude Code**:
-  ```bash
-  claude mcp add chrome-devtools -- npx -y chrome-devtools-mcp@latest --browser-url=http://127.0.0.1:9222
-  ```
-- **Playwright MCP**:
-  ```bash
-  npx -y @playwright/mcp@latest --cdp-endpoint http://127.0.0.1:9222
-  ```
-
 ## Compilar todo desde Linux
 
 ```bash
