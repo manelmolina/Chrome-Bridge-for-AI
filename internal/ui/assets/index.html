@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chrome Bridge for AI</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">⚡</div>
+        <div>
+          <h1>Chrome Bridge for AI</h1>
+          <p class="subtitle">Conecta tus agentes de código al Chrome de tu equipo mediante Chrome Dev Tools</p>
+        </div>
+      </div>
+      <span id="statusBadge" class="badge badge-idle">Desconectado</span>
+    </header>
+
+    <div class="layout-grid">
+      <div class="col-left">
+        <section class="card chrome-card" id="chromeCard">
+      <div class="chrome-row">
+        <div>
+          <div class="section-label">Chrome Local</div>
+          <div id="chromeStatusText" class="chrome-status">Comprobando depuración remota...</div>
+        </div>
+        <button type="button" id="refreshChromeBtn" class="btn-ghost" title="Volver a comprobar">↻ Comprobar</button>
+      </div>
+      <div id="chromeHelpBox" class="chrome-help hidden">
+        <p>Para que las herramientas del servidor controlen tu Chrome actual:</p>
+        <ol>
+          <li>Abre <code>chrome://inspect/#remote-debugging</code> en Chrome.</li>
+          <li>Activa <strong>Allow remote debugging for this browser instance</strong>.</li>
+        </ol>
+        <div class="help-actions">
+          <button type="button" id="copyInspectBtn" class="btn-secondary">Copiar URL de Chrome</button>
+          <button type="button" id="launchDebugBtn" class="btn-secondary">Abrir Chrome aislado (:9222)</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <form id="connectForm" autocomplete="off">
+        <div class="grid-host">
+          <div class="field">
+            <label for="host">IP o dominio del servidor</label>
+            <input id="host" name="host" type="text" placeholder="ej. 192.168.1.50 o servidor.tudominio.com" required />
+          </div>
+          <div class="field">
+            <label for="port">Puerto SSH</label>
+            <input id="port" name="port" type="number" min="1" max="65535" value="22" required />
+          </div>
+        </div>
+
+        <div class="field field-user">
+          <label for="username">Usuario</label>
+          <input id="username" name="username" type="text" placeholder="root" required />
+        </div>
+
+        <div class="auth-tabs" role="tablist" aria-label="Método de autenticación SSH">
+          <button type="button" class="auth-tab active" data-auth="password" role="tab" aria-selected="true">Contraseña</button>
+          <button type="button" class="auth-tab" data-auth="key" role="tab" aria-selected="false">Clave SSH</button>
+        </div>
+
+        <div id="passwordPanel" class="auth-panel">
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <div class="password-wrap">
+              <input id="password" name="password" type="password" placeholder="••••••••" required />
+              <button type="button" id="togglePassBtn" class="eye-btn" title="Mostrar/ocultar">👁</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="keyPanel" class="auth-panel hidden">
+          <div class="field">
+            <label for="privateKeyPath">Clave privada SSH</label>
+            <div class="key-path-row">
+              <input id="privateKeyPath" name="privateKeyPath" type="text" placeholder="ej. ~/.ssh/id_ed25519" />
+              <input id="keyFileInput" type="file" class="hidden" />
+              <button type="button" id="browseKeyBtn" class="btn-secondary">Archivo...</button>
+            </div>
+            <div id="detectedKeysRow" class="key-chips hidden"></div>
+            <small id="loadedKeyBadge" class="key-loaded hidden"></small>
+          </div>
+
+          <div class="field field-passphrase">
+            <label for="keyPassphrase">Passphrase (opcional)</label>
+            <div class="password-wrap">
+              <input id="keyPassphrase" name="keyPassphrase" type="password" placeholder="Solo si tu clave está cifrada" />
+              <button type="button" id="toggleKeyPassBtn" class="eye-btn" title="Mostrar/ocultar">👁</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="formError" class="form-error hidden"></div>
+
+        <div class="actions">
+          <button type="submit" id="connectBtn" class="btn-primary">Conectar y crear túnel</button>
+          <button type="button" id="disconnectBtn" class="btn-danger hidden">Desconectar túnel</button>
+        </div>
+      </form>
+        </section>
+      </div>
+
+      <section class="card logs-card">
+        <div class="logs-header">
+          <span class="section-label">Registro de actividad</span>
+          <button type="button" id="copyLogsBtn" class="btn-ghost">Copiar logs</button>
+        </div>
+        <div id="logsBox" class="logs-box"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Chrome Bridge for AI
+Comment=Conecta tus agentes de código al Chrome de tu equipo mediante Chrome Dev Tools
+Exec=chrome-bridge-for-ai
+Icon=chrome-bridge-for-ai
+Terminal=false
+Categories=Development;
