@@ -19,22 +19,7 @@ Al establecer el túnel SSH, la app habilita automáticamente **ambos** mecanism
 
 ## Uso rápido
 
-1. Ejecuta la versión de tu sistema:
-   - **Linux (AppImage)**:
-     ```bash
-     chmod +x Chrome-Bridge-for-AI-x86_64.AppImage
-     ./Chrome-Bridge-for-AI-x86_64.AppImage
-     ```
-   - **Windows**: doble clic en `chrome-bridge-for-ai-windows-amd64.exe`.
-   - **macOS**: abre el ejecutable de tu procesador (`chrome-bridge-for-ai-macos-apple-silicon-arm64` o `chrome-bridge-for-ai-macos-intel-amd64`). Si lo ejecutas desde Terminal o macOS lo bloquea por no estar firmado, ejecuta una vez:
-     ```bash
-     chmod +x chrome-bridge-for-ai-macos-apple-silicon-arm64
-     xattr -d com.apple.quarantine chrome-bridge-for-ai-macos-apple-silicon-arm64 2>/dev/null || true
-     ./chrome-bridge-for-ai-macos-apple-silicon-arm64
-     ```
-     *(Cambia `apple-silicon-arm64` por `intel-amd64` si tu Mac es Intel).*
-2. Dentro de la aplicación, pulsa **Abrir Chrome aislado (:9222)** para lanzar un perfil de Chrome con CDP ya activo.
-3. Introduce **IP/dominio del servidor**, **Puerto SSH** (`22` por defecto), **Usuario**, elige **Contraseña** o **Clave SSH**, y pulsa **Conectar y crear túnel**.
+Para usarlo, solo tienes que decirle a tu agente de IA que se conecte a Chrome por Chrome Dev Tools y revise lo que necesites (por ejemplo: *"Conéctate a Chrome por Chrome Dev Tools y mira los errores de consola o las peticiones de red"*).
 
 ## Configurar herramientas en el servidor
 
