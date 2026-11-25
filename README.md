@@ -1,6 +1,8 @@
 # Chrome Bridge for AI
 
-Aplicación de escritorio ligera para **Windows**, **Linux (AppImage)** y **macOS** que crea un túnel SSH inverso seguro desde tu servidor hacia tu Google Chrome local, permitiendo que **Antigravity**, **Codex CLI**, **Claude Code**, **Playwright**, **Puppeteer** y cualquier cliente MCP/CDP en el servidor controlen tu navegador local (capturas de pantalla, logs de consola, red, interacción, etc.).
+Aplicación de escritorio ligera para **Windows**, **Linux (AppImage)** y **macOS** pensada exclusivamente para hacer **troubleshooting y debugging de aplicaciones**, permitiendo que un agente de IA en tu servidor (**Antigravity**, **Codex CLI**, **Claude Code**, **Playwright**, **Puppeteer** y cualquier cliente MCP/CDP) pueda ver toda la información de tu navegador local (consola, red, DOM, capturas de pantalla, estado e interacción) a través de un túnel SSH inverso seguro.
+
+> **Uso previsto:** esta herramienta sirve únicamente para tareas de troubleshooting y debugging de aplicaciones donde necesites que tu agente de IA inspeccione y vea todo lo que ocurre en tu navegador.
 
 ## Descargas generadas (`dist/`)
 
@@ -13,17 +15,11 @@ Aplicación de escritorio ligera para **Windows**, **Linux (AppImage)** y **macO
 
 Al establecer el túnel SSH, la app habilita automáticamente **ambos** mecanismos en el servidor:
 1. **`DevToolsActivePort` (`~/.config/google-chrome/DevToolsActivePort`)** + puerto inverso hacia tu Chrome local: compatible de serie con **Antigravity (`/browser`)** y clientes `--autoConnect`.
-2. **Endpoint CDP estándar (`http://127.0.0.1:9222`)**: proxy HTTP+WebSocket compatible con **Codex CLI**, **Claude Code**, **Playwright**, **Puppeteer** y `chrome-devtools-mcp --browser-url=http://127.0.0.1:9222`, incluso si Chrome se abrió mediante `chrome://inspect/#remote-debugging`.
+2. **Endpoint CDP estándar (`http://127.0.0.1:9222`)**: proxy HTTP+WebSocket compatible con **Codex CLI**, **Claude Code**, **Playwright**, **Puppeteer** y `chrome-devtools-mcp --browser-url=http://127.0.0.1:9222`.
 
 ## Uso rápido
 
-1. En tu PC (Windows, Linux o macOS), abre Google Chrome (`v144+`), entra en:
-   ```text
-   chrome://inspect/#remote-debugging
-   ```
-   y activa **Allow remote debugging for this browser instance**.
-   *(También puedes pulsar **Abrir Chrome aislado (:9222)** dentro de la app).*
-2. Ejecuta la versión de tu sistema:
+1. Ejecuta la versión de tu sistema:
    - **Linux (AppImage)**:
      ```bash
      chmod +x Chrome-Bridge-for-AI-x86_64.AppImage
@@ -37,6 +33,7 @@ Al establecer el túnel SSH, la app habilita automáticamente **ambos** mecanism
      ./chrome-bridge-for-ai-macos-apple-silicon-arm64
      ```
      *(Cambia `apple-silicon-arm64` por `intel-amd64` si tu Mac es Intel).*
+2. Dentro de la aplicación, pulsa **Abrir Chrome aislado (:9222)** para lanzar un perfil de Chrome con CDP ya activo.
 3. Introduce **IP/dominio del servidor**, **Puerto SSH** (`22` por defecto), **Usuario**, elige **Contraseña** o **Clave SSH**, y pulsa **Conectar y crear túnel**.
 
 ## Configurar herramientas en el servidor
